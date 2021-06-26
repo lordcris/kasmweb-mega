@@ -6,6 +6,8 @@ https://kasmweb.com/docs/latest/how_to/building_images.html?utm_campaign=Dockerh
 
 The container is now accessible via a browser : https://<IP>:6901
 
+port 6901
+
 User : kasm_user
   
 Password: password
