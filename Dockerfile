@@ -1,4 +1,4 @@
-FROM kasmweb/desktop:1.9.0
+FROM kasmweb/desktop:1.10.0
 USER root
 
 ENV HOME /home/kasm-default-profile
@@ -9,10 +9,10 @@ WORKDIR $HOME
 ######### Customize Container Here ###########
 
 
-RUN  wget https://mega.nz/linux/MEGAsync/xUbuntu_18.04/amd64/megasync_4.4.0-1.1_amd64.deb \
+RUN  wget https://mega.nz/linux/MEGAsync/xUbuntu_18.04/amd64/megasync_4.5.3-1.1_amd64.deb \
     && apt-get update \
-    && apt-get install -y ./megasync_4.4.0-1.1_amd64.deb 
-
+    && apt-get install -y ./megasync_4.5.3-1.1_amd64.deb
+    
 ######### End Customizations ###########
 
 RUN chown 1000:0 $HOME
