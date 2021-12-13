@@ -40,9 +40,7 @@ jobs:
           push: true
           tags: |
             lordcris/kasmweb-mega:latest
-            lordcris/kasmweb-mega:1.0.0
             ghcr.io/lordcris/kasmweb-mega:latest
-            ghcr.io/lordcris/kasmweb-mega:1.0.0
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
