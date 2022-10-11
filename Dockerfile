@@ -1,4 +1,4 @@
-FROM kasmweb/desktop:1.10.0
+FROM kasmweb/desktop:1.11.0
 USER root
 
 ENV HOME /home/kasm-default-profile
