@@ -12,11 +12,8 @@ WORKDIR $HOME
 RUN  wget -O megasync_amd64.deb https://mega.nz/linux/MEGAsync/xUbuntu_18.04/amd64/megasync_4.6.3-5.1_amd64.deb \
     && apt-get update \
     && apt-get install -y ./megasync_amd64.deb \
-    && rm -f ./megasync_amd64.deb \
-    && cp /usr/share/applications/megasync.desktop /home/kasm-user/Desktop \
-    #&& chmod a+x /home/kasm-user/Desktop/megasync.desktop 
-    && mkdir /home/kasm-user/MEGA \
-    && ln -s /home/kasm-user/MEGA /home/kasm-user/Desktop
+    && rm -f ./megasync_amd64.deb
+
 
 ######### End Customizations ###########
 
@@ -25,6 +22,10 @@ RUN $STARTUPDIR/set_user_permission.sh $HOME
 
 ENV HOME /home/kasm-user
 WORKDIR $HOME
-RUN mkdir -p $HOME && chown -R 1000:0 $HOME
+RUN mkdir -p $HOME/Desktop && chown -R 1000:0 $HOME
+RUN cp /usr/share/applications/megasync.desktop /home/kasm-user/Desktop \
+    && chmod a+x /home/kasm-user/Desktop/megasync.desktop \
+    && mkdir /home/kasm-user/MEGA \
+    && ln -s /home/kasm-user/MEGA /home/kasm-user/Desktop
 
 USER 1000
