@@ -22,6 +22,12 @@ RUN $STARTUPDIR/set_user_permission.sh $HOME
 
 ENV HOME /home/kasm-user
 WORKDIR $HOME
-RUN mkdir -p $HOME && chown -R 1000:0 $HOME
+RUN mkdir -p $HOME/Desktop 
+RUN cp /usr/share/applications/megasync.desktop /home/kasm-user/Desktop \
+    && chmod a+x /home/kasm-user/Desktop/megasync.desktop \
+    && mkdir /home/kasm-user/MEGA \
+    && ln -s /home/kasm-user/MEGA /home/kasm-user/Desktop \
+    && chown -R 1000:0 $HOME
+
 
 USER 1000
