@@ -14,9 +14,9 @@ RUN  wget -O megasync_amd64.deb https://mega.nz/linux/MEGAsync/xUbuntu_18.04/amd
     && apt-get install -y ./megasync_amd64.deb \
     && rm -f ./megasync_amd64.deb \
     && cp /usr/share/applications/megasync.desktop /home/kasm-user/Desktop \
-    && chmod a+x /home/kasm-user/Desktop/megasync.desktop 
-    #&& mkdir /home/kasm-user/MEGA \
-    #&& ln -s /home/kasm-user/MEGA /home/kasm-user/Desktop
+    #&& chmod a+x /home/kasm-user/Desktop/megasync.desktop 
+    && mkdir /home/kasm-user/MEGA \
+    && ln -s /home/kasm-user/MEGA /home/kasm-user/Desktop
 
 ######### End Customizations ###########
 
