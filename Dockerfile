@@ -10,7 +10,7 @@ WORKDIR $HOME
 
 
 RUN  wget -O megasync_amd64.deb https://mega.nz/linux/repo/xUbuntu_20.04/amd64/megasync-xUbuntu_20.04_amd64.deb \
-###    && apt-get update \
+    && apt-get update \
     && apt-get install -y ./megasync_amd64.deb \
     && rm -f ./megasync_amd64.deb
 
