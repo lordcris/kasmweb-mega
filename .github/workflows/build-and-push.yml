@@ -52,8 +52,8 @@ jobs:
         env:
           DSLIM_HTTP_PROBE: true
         with:
-          target: lordcris/kasmweb-mega:rolling
+          target: ${{ github.repository }}:rolling
           tag: "rolling-slim"
 
       # Push to the registry
-      - run: docker image push lordcris --all-tags
+      - run: docker image push "${{ github.repository }}" --all-tags
