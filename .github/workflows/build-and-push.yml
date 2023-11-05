@@ -39,7 +39,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64
-          push: false
+          push: true
           tags: |
             lordcris/kasmweb-mega:rolling
             ghcr.io/lordcris/kasmweb-mega:rolling
@@ -52,7 +52,7 @@ jobs:
         env:
           DSLIM_HTTP_PROBE: true
         with:
-          target: ${{ github.repository }}:rolling
+          target: ghcr.io/lordcris/kasmweb-mega:rolling
           tag: "rolling-slim"
 
       # Push to the registry
