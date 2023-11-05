@@ -47,13 +47,3 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
-         # Slim it!
-      - uses: kitabisa/docker-slim-action@v1
-        env:
-          DSLIM_HTTP_PROBE: true
-        with:
-          target: ghcr.io/lordcris/kasmweb-mega:rolling
-          tag: "rolling-slim"
-
-      # Push to the registry
-      - run: docker image push "${{ github.repository }}" --all-tags
