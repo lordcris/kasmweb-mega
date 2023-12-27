@@ -8,6 +8,9 @@ WORKDIR $HOME
 
 ######### Customize Container Here ###########
 
+# Generate a file with a random number and save it in the home directory
+RUN echo $((1 + RANDOM % 1000)) > $HOME/random_number.txt
+
 
 RUN  wget -O megasync_amd64.deb https://mega.nz/linux/repo/xUbuntu_20.04/amd64/megasync-xUbuntu_20.04_amd64.deb \
     && apt-get update \
