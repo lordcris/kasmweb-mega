@@ -10,11 +10,12 @@ WORKDIR $HOME
 
 
 RUN  wget -O megasync_amd64.deb https://mega.nz/linux/repo/xUbuntu_20.04/amd64/megasync-xUbuntu_20.04_amd64.deb \
+    && add-apt-repository ppa:beineri/opt-qt-5.15.0-focal \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade \ 
     && apt-get install -y ./megasync_amd64.deb \
     && rm -f ./megasync_amd64.deb
-    
+
 ######### End Customizations ###########
 
 RUN chown 1000:0 $HOME
