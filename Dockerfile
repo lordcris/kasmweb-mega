@@ -12,7 +12,7 @@ WORKDIR $HOME
 RUN date +%s > $HOME/date_in_seconds.txt
 
 
-RUN  apt update &&  apt full-upgrade -y && apt install flatpak && flatpak install flathub nz.mega.MEGAsync
+RUN  apt update &&  apt full-upgrade -y && apt install flatpak -y && flatpak install flathub nz.mega.MEGAsync
 
 
 ######### End Customizations ###########
