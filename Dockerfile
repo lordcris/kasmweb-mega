@@ -12,10 +12,7 @@ WORKDIR $HOME
 RUN date +%s > $HOME/date_in_seconds.txt
 
 
-RUN  wget -O megasync_amd64.deb https://mega.nz/linux/repo/xUbuntu_20.04/amd64/megasync-xUbuntu_20.04_amd64.deb \
-    && apt-get update \
-    && apt-get install -y ./megasync_amd64.deb \
-    && rm -f ./megasync_amd64.deb
+RUN  sudo apt install flatpak && flatpak install flathub nz.mega.MEGAsync
 
 
 ######### End Customizations ###########
