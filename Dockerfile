@@ -1,4 +1,4 @@
-FROM kasmweb/desktop:1.14.0-rolling
+FROM kasmweb/ubuntu-jammy-dind:1.14.0-rolling
 USER root
 
 ENV HOME /home/kasm-default-profile
@@ -8,12 +8,12 @@ WORKDIR $HOME
 
 ######### Customize Container Here ###########
 
-# Generate a file with the current date in seconds and save it in the home directory
-RUN date +%s > $HOME/date_in_seconds.txt
 
-
-RUN  apt update &&  apt full-upgrade -y && apt install flatpak -y && flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak install flathub nz.mega.MEGAsync -y
-
+RUN  wget -O megasync_amd64.deb https://mega.nz/linux/repo/xUbuntu_22.04/amd64/megasync-xUbuntu_22.04_amd64.deb \
+    && apt-get update \
+    # && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade \ 
+    && apt-get install -y ./megasync_amd64.deb \
+    && rm -f ./megasync_amd64.deb
 
 ######### End Customizations ###########
 
@@ -23,8 +23,11 @@ RUN $STARTUPDIR/set_user_permission.sh $HOME
 ENV HOME /home/kasm-user
 WORKDIR $HOME
 RUN mkdir -p $HOME/Desktop 
-RUN mkdir /home/kasm-user/MEGA \
+RUN cp /usr/share/applications/megasync.desktop /home/kasm-user/Desktop \
+    && chmod a+x /home/kasm-user/Desktop/megasync.desktop \
+    && mkdir /home/kasm-user/MEGA \
     && ln -s /home/kasm-user/MEGA /home/kasm-user/Desktop \
     && chown -R 1000:0 $HOME
+
 
 USER 1000
