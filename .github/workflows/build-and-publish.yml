@@ -3,7 +3,7 @@ name: ci
 on:
   push:
     branches:
-      - 'main'
+      - 'debian'
 
 jobs:
   docker:
@@ -39,8 +39,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            lordcris/kasmweb-mega:latest
-            ghcr.io/lordcris/kasmweb-mega:latest
+            lordcris/kasmweb-mega:debian
+            ghcr.io/lordcris/kasmweb-mega:debian
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
