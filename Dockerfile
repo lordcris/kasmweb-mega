@@ -1,4 +1,4 @@
-FROM kasmweb/ubuntu-jammy-desktop:1.15.0
+FROM kasmweb/core-debian-bookworm:1.15.0
 USER root
 
 ENV HOME /home/kasm-default-profile
@@ -9,7 +9,7 @@ WORKDIR $HOME
 ######### Customize Container Here ###########
 
 
-RUN  wget -O megasync_amd64.deb https://mega.nz/linux/repo/xUbuntu_22.04/amd64/megasync-xUbuntu_22.04_amd64.deb \
+RUN  wget -O megasync_amd64.deb https://mega.nz/linux/repo/Debian_12/amd64/megasync-Debian_12_amd64.deb \
     && apt-get update \
     # && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade \ 
     && apt-get install -y ./megasync_amd64.deb \
