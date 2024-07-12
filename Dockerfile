@@ -10,8 +10,12 @@ WORKDIR $HOME
 
 
 RUN  wget -O megasync_amd64.deb https://mega.nz/linux/repo/xUbuntu_22.04/amd64/megasync-xUbuntu_22.04_amd64.deb \
-    && apt-get update \
     # && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade \ 
+    && install -d -m 0755 /etc/apt/keyrings \
+    && wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null \
+    && echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null \
+    && echo 'Package: *\nPin: origin packages.mozilla.org\nPin-Priority: 1000' > /etc/apt/preferences.d/mozilla \
+    && apt-get update \
     && apt-get install -y firefox \
     && apt-get install -y ./megasync_amd64.deb \
     && rm -f ./megasync_amd64.deb
