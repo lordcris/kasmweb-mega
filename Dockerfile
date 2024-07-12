@@ -17,6 +17,7 @@ RUN  wget -O megasync_amd64.deb https://mega.nz/linux/repo/xUbuntu_22.04/amd64/m
     && echo 'Package: *\nPin: origin packages.mozilla.org\nPin-Priority: 1000' > /etc/apt/preferences.d/mozilla \
     && apt-get update \
     && apt-get install -y firefox \
+    && update-alternatives  --install /usr/bin/x-www-browser x-www-browser /usr/bin/firefox 70 \
     && apt-get install -y ./megasync_amd64.deb \
     && rm -f ./megasync_amd64.deb
 
