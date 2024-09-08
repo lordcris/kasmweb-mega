@@ -1,12 +1,10 @@
 name: ci
-
 on:
   push:
     branches:
       - 'rolling'
   schedule:
-    - cron: "30 7 * * * "
-
+    - cron: "30 7 * * *"
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -45,8 +43,5 @@ jobs:
           tags: |
             lordcris/kasmweb-mega:rolling
             ghcr.io/lordcris/kasmweb-mega:rolling
-
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-
-
