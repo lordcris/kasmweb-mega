@@ -12,6 +12,6 @@ ex. https://127.0.0.1:6901/
   
 sudo docker run --rm -it --shm-size=512m -p 6901:6901 -e VNCOPTIONS=-disableBasicAuth lordcris/kasmweb-mega:rolling
 
-
+.
 
 
