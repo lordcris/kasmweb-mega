@@ -1,0 +1,31 @@
+services:
+  kasm:
+    image: lordcris/kasmweb-mega:rolling
+    pull_policy: always
+    shm_size: "512m"
+    environment:
+      - VNCOPTIONS=-disableBasicAuth
+    expose:
+      - "6901"
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2
+    pull_policy: always
+    depends_on:
+      - kasm
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN=${DOMAIN}
+      - ACME_EMAIL=${ACME_EMAIL}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
