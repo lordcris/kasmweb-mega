@@ -42,6 +42,4 @@ jobs:
           push: true
           tags: |
             lordcris/kasmweb-mega:latest
-            lordcris/kasmweb-mega:rolling
             ghcr.io/lordcris/kasmweb-mega:latest
-            ghcr.io/lordcris/kasmweb-mega:rolling
