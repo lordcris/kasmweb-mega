@@ -1,4 +1,4 @@
-FROM kasmweb/core-ubuntu-jammy:1.17.0-rolling-daily
+FROM kasmweb/core-ubuntu-jammy:1.18.0-rolling-daily
 USER root
 
 ENV HOME=/home/kasm-default-profile
@@ -9,7 +9,7 @@ WORKDIR $HOME
 ######### Customize Container Here ###########
 
 
-RUN  wget -O megasync_amd64.deb https://mega.nz/linux/repo/xUbuntu_22.04/amd64/megasync-xUbuntu_22.04_amd64.deb \
+RUN  wget -O megasync_amd64.deb https://mega.nz/linux/repo/xUbuntu_25.04/amd64/megasync-xUbuntu_25.04_amd64.deb \
     # && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade \ 
     && install -d -m 0755 /etc/apt/keyrings \
     && wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null \
