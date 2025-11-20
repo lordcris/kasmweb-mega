@@ -16,7 +16,7 @@ sudo docker run --rm -it --shm-size=512m -p 6901:6901 -e VNCOPTIONS=-disableBasi
 
 .
 
-## Docker Compose option
+## Docker Compose option.
 
 If you prefer a reverse-proxy front end with automatic TLS, use the provided `docker-compose.yml` and `Caddyfile`.
 
