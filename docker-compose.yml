@@ -1,6 +1,6 @@
 services:
   kasm:
-    image: lordcris/kasmweb-mega:rolling
+    image: lordcris/kasmweb-mega:latest
     pull_policy: always
     shm_size: "512m"
     environment:
