@@ -21,34 +21,29 @@ ex. https://127.0.0.1:6901/
 
 .
 
-## Docker Compose option.
+## Docker Compose option (Cloudflare Tunnel + Access)
 
-If you prefer a reverse-proxy front end with automatic TLS, use the provided `docker-compose.yml` and `Caddyfile`.
+`docker-compose.yml` runs Kasm behind a Cloudflare Tunnel. No inbound ports are opened on the host;
+`cloudflared` makes an outbound connection to Cloudflare, which serves HTTPS on your domain and puts
+a Cloudflare Access login in front of it. Kasm itself runs without VNC auth (`-disableBasicAuth`),
+so **Access is the only thing protecting the desktop** - never publish the hostname without an Access policy.
 
-### Features
-- MEGAsync desktop client available on first login.
-- Caddy reverse proxy terminates HTTPS using Let's Encrypt certificates.
-- Compose stack pulls the latest images each time with `pull_policy: always`.
-
-### Requirements
-- Docker Engine 20.10+ with the Compose plugin.
-- A DNS record pointing at your host (set in `.env`).
-- Ports 80 and 443 forwarded to the Docker host; keep any DNS proxy (for example Cloudflare) in "DNS only" mode until the certificate is issued.
-
-### Quick start
-1. Clone the repo and change into it: `git clone https://github.com/lordcris/kasmweb-mega && cd kasmweb-mega`.
-2. Create `.env` (ignored by git) with your values:
+### Setup
+1. In the Cloudflare dashboard, go to Networking > Tunnels and create a tunnel (type cloudflared). Copy its token.
+2. Add a published application route to the tunnel: your hostname -> `https://kasm:6901`,
+   with TLS > "Disable TLS certificate verification" on (Kasm uses a self-signed certificate).
+3. In Zero Trust > Access controls > Applications, add a self-hosted application for the same hostname
+   with an Allow policy for your email(s).
+4. Create `.env` (ignored by git):
    ```env
-   DOMAIN=your.domain.example.com
-   ACME_EMAIL=you@example.com
+   TUNNEL_TOKEN=your-tunnel-token
    ```
-3. Start the stack: `docker compose up -d`.
-4. Watch the logs if needed: `docker compose logs -f caddy`.
-5. Browse to `https://your.domain.example.com` once the certificate loads.
+5. Start the stack: `docker compose up -d`, and check `docker compose logs -f cloudflared`.
+6. Make sure no router port forwarding points at this host; it isn't needed.
 
 ### Daily updates
-- The upstream image updates frequently; `docker compose up` will fetch the newest build before starting.
-- Stop everything with `docker compose down` (removes containers, keeps images and volumes).
+- `pull_policy: always` makes `docker compose up` fetch the newest images before starting.
+- Stop everything with `docker compose down` (removes containers, keeps images).
 
 ### Optional cleanup
 - After shutting down, run `docker system prune -a --volumes` manually if you want to reclaim all Docker resources.

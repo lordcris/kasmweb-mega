@@ -4,27 +4,18 @@ services:
     pull_policy: always
     shm_size: "512m"
     environment:
+      # No VNC login: access is protected by Cloudflare Access in front of the tunnel.
       - VNCOPTIONS=-disableBasicAuth
     expose:
       - "6901"
     restart: unless-stopped
 
-  caddy:
-    image: caddy:2
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    pull_policy: always
     depends_on:
       - kasm
-    ports:
-      - "80:80"
-      - "443:443"
+    command: tunnel --no-autoupdate run
     environment:
-      - DOMAIN=${DOMAIN}
-      - ACME_EMAIL=${ACME_EMAIL}
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     restart: unless-stopped
-
-volumes:
-  caddy_data:
-  caddy_config:
